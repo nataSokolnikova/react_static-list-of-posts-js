@@ -17,7 +17,7 @@ export const App = () => {
     },
   }));
 
-  const comments = posts.flatMap((post) => [
+  const comments = posts.flatMap(post => [
     {
       id: post.id * 2 - 1,
       postId: post.id,

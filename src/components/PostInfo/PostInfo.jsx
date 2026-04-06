@@ -3,14 +3,19 @@ import { CommentList } from '../CommentList/CommentList';
 import { UserInfo } from '../UserInfo/UserInfo';
 import './PostInfo.scss';
 
-export const PostInfo = ({ post }) => {
-  const postComments = post.comments || [];
+export const PostInfo = ({ post, comments = [] }) => {
+  if (!post) {
+    return null;
+  }
+
+  const postComments = comments.length
+    ? comments.filter(comment => comment.postId === post.id)
+    : (post.comments || []);
 
   return (
     <div className="PostInfo">
       <div className="PostInfo__header">
         <h3 className="PostInfo__title">{post.title}</h3>
-
         <p>
           {' Posted by '}
           <UserInfo user={post.user} />
@@ -24,9 +29,10 @@ export const PostInfo = ({ post }) => {
       {postComments.length > 0 ? (
         <CommentList comments={postComments} />
       ) : (
-        <b data-cy="NoCommentsMessage">No comments yet</b>
+        <b data-cy="NoCommentsMessage">
+          No comments yet
+        </b>
       )}
     </div>
   );
 };
-
