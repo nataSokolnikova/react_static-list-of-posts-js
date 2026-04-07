@@ -10,7 +10,7 @@ export const PostInfo = ({ post, comments = [] }) => {
 
   const postComments = comments.length
     ? comments.filter(comment => comment.postId === post.id)
-    : (post.comments || []);
+    : post.comments || [];
 
   return (
     <div className="PostInfo">
@@ -29,9 +29,7 @@ export const PostInfo = ({ post, comments = [] }) => {
       {postComments.length > 0 ? (
         <CommentList comments={postComments} />
       ) : (
-        <b data-cy="NoCommentsMessage">
-          No comments yet
-        </b>
+        <b data-cy="NoCommentsMessage">No comments yet</b>
       )}
     </div>
   );
