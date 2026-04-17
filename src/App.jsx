@@ -10,13 +10,13 @@ export const App = () => {
   const posts = postsFromServer.map(post => ({
     ...post,
     user: usersFromServer.find(user => user.id === post.userId),
+    comments: commentsFromServer.filter(comment => comment.postId === post.id),
   }));
-  const comments = commentsFromServer;
 
   return (
     <section className="App">
       <h1 className="App__title">Static list of posts</h1>
-      <PostList posts={posts} comments={comments} />
+      <PostList posts={posts} />
     </section>
   );
 };

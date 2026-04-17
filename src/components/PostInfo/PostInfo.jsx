@@ -3,14 +3,12 @@ import { CommentList } from '../CommentList/CommentList';
 import { UserInfo } from '../UserInfo/UserInfo';
 import './PostInfo.scss';
 
-export const PostInfo = ({ post, comments = [] }) => {
+export const PostInfo = ({ post }) => {
   if (!post) {
     return null;
   }
 
-  const postComments = comments.length
-    ? comments.filter(comment => comment.postId === post.id)
-    : post.comments || [];
+  const postComments = post.comments || [];
 
   return (
     <div className="PostInfo">
